@@ -8,8 +8,8 @@ import Foundation
 final class NetworkManager{
     static let shared = NetworkManager()
     
-    static let baseURL = "https://seanallen-course-backend.herokuapp.com/swiftui-fundamentals"
-    private let apperizerURL = baseURL + "/appetizers"
+    static let baseURL = "https://seanallen-course-backend.herokuapp.com/swiftui-fundamentals/"
+    private let apperizerURL = baseURL + "appetizers"
     private init(){}
     
     func getAppetizers(completed: @escaping (Result<[Appetizer], APError>) -> Void)
@@ -19,7 +19,7 @@ final class NetworkManager{
             return 
         }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
-            guard let _ = error else{
+            if let _ = error {
                 completed(.failure(.unableToComplete))
                 return
             }
